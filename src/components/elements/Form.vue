@@ -21,13 +21,13 @@
 
 <script>
 export default {
-  name: 'Form',
+  name: "Form",
 
   methods: {
     submit() {
-      this.$emit('submit');
-    },
-  },
+      this.$emit("submit");
+    }
+  }
 };
 </script>
 
@@ -119,7 +119,7 @@ export default {
       position: relative;
       clear: both;
 
-      input:not([type='checkbox']):not([type='radio']),
+      input:not([type="checkbox"]):not([type="radio"]),
       .input {
         display: inline-block !important;
       }
@@ -132,7 +132,7 @@ export default {
         color: $subtitle;
       }
 
-      input:not([type='checkbox']):not([type='radio']),
+      input:not([type="checkbox"]):not([type="radio"]),
       .input,
       select,
       textarea {
@@ -163,7 +163,7 @@ export default {
       }
 
       &--error {
-        input:not([type='checkbox']):not([type='radio']),
+        input:not([type="checkbox"]):not([type="radio"]),
         .input,
         select,
         textarea {

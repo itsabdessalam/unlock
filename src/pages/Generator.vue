@@ -1,37 +1,68 @@
 <template>
   <Layout>
-    <h2>Generator</h2>
-    <label for="">Length</label>
-    <input
-      type="number"
-      id="passwordLength"
-      min="1"
-      value="1"
-      v-model="passwordLength"
-    />
-    <label for="">Lowercase</label>
-    <input type="checkbox" id="lowercaseChars" v-model="lowercaseChars" />
-    <label for="">Uppercase</label>
-    <input type="checkbox" id="uppercaseChars" v-model="uppercaseChars" />
-    <label for="">Numbers</label>
-    <input type="checkbox" id="numbers" v-model="numbers" />
-    <label for="">Special chars</label>
-    <input type="checkbox" id="specialChars" v-model="specialChars" />
-    <button @click="generatePassword">Generate</button>
+    <div class="password__container">
+      <span>
+        {{ password }}
+      </span>
+    </div>
 
-    <p v-if="password">{{ password }}</p>
+    <div class="password__length">
+      <label for="passwordLength">Length</label>
+      <Input
+        type="number"
+        id="passwordLength"
+        name="passwordLength"
+        min="1"
+        v-model="passwordLength"
+      />
+    </div>
+
+    <div class="password__criteria">
+      <Checkbox
+        id="lowercaseChars"
+        name="lowercaseChars"
+        label="Lowercase"
+        :checked="lowercaseChars"
+        :disabled="true"
+        v-model="lowercaseChars"
+      />
+
+      <Checkbox
+        id="uppercaseChars"
+        name="uppercaseChars"
+        label="Uppercase"
+        :checked="uppercaseChars"
+        v-model="uppercaseChars"
+      />
+
+      <Checkbox
+        id="numbers"
+        name="numbers"
+        label="Numbers"
+        :checked="numbers"
+        v-model="numbers"
+      />
+      <Checkbox
+        id="specialChars"
+        name="specialChars"
+        label="Special chars"
+        :checked="specialChars"
+        v-model="specialChars"
+      />
+    </div>
+
+    <Button class="button button--primary" @click="generatePassword">
+      Generate
+    </Button>
   </Layout>
 </template>
 
 <script>
-const shuffle = ([...arr]) => {
-  let m = arr.length;
-  while (m) {
-    const i = Math.floor(Math.random() * m--);
-    [arr[m], arr[i]] = [arr[i], arr[m]];
-  }
-  return arr;
-};
+import { generate } from "~/utils/password";
+
+import Checkbox from "~/components/elements/Checkbox";
+import Input from "~/components/elements/Input";
+import Button from "~/components/elements/Button";
 
 export default {
   data() {
@@ -44,48 +75,51 @@ export default {
       specialChars: true
     };
   },
+  components: { Checkbox, Input, Button },
   methods: {
-    getPasswordConfig() {
-      console.log(
-        "toto",
-        this.passwordLength,
-        this.lowercaseChars,
-        this.uppercaseChars,
-        this.numbers,
-        this.specialChars
-      );
-    },
-    generatePassword(
-      length,
-      lowercaseChars,
-      uppercaseChars,
-      numbers,
-      specialChars
-    ) {
-      let password = "";
-
-      if (this.lowercaseChars) {
-        password += "abcdedfghijklmnopqrst";
-      }
-
-      if (this.uppercaseChars) {
-        password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      }
-
-      if (this.numbers) {
-        password += "0123456789";
-      }
-
-      if (this.specialChars) {
-        password += "!@#$%&*";
-      }
-
-      password = shuffle(password.split(""));
-
-      this.password = password.slice(0, this.passwordLength).join("");
+    generatePassword() {
+      this.password = generate({
+        length: this.passwordLength,
+        lowercase: this.lowercaseChars,
+        uppercase: this.uppercaseChars,
+        numbers: this.numbers,
+        special: this.specialChars
+      });
     }
   }
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.password__criteria {
+  margin: 24px 0;
+  padding: 0 4px;
+
+  .checkbox {
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.password__container {
+  margin-bottom: 24px;
+
+  span {
+    text-align: center;
+    font-size: 18px;
+    height: 72px;
+    line-height: 30px;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: inherit;
+    background-color: #fff;
+    outline: 0;
+    transition-duration: 0.2s;
+  }
+}
+</style>

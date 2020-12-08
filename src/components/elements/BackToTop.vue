@@ -16,17 +16,17 @@
 
 <script>
 export default {
-  name: 'BackToTop',
+  name: "BackToTop",
   data() {
     return {
-      visible: false,
+      visible: false
     };
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleClick() {
@@ -42,8 +42,8 @@ export default {
       if (this.visible && scrollTop <= 500) {
         this.visible = false;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

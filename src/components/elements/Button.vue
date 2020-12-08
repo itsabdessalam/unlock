@@ -17,16 +17,17 @@ export default {
 
 <style lang="scss">
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all ease-out 0.2s;
   background-color: transparent;
-  font-size: 14px;
-  min-width: 120px;
-  padding: 16px 24px;
-  min-width: 128px;
   border: none;
+  font-size: 18px;
+  height: 72px;
+  line-height: 30px;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  border: 2px solid $primary;
+  border-radius: 12px;
   cursor: pointer;
   transition: all ease-out 0.2s;
 

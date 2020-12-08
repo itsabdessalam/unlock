@@ -95,6 +95,9 @@
           </ul>
         </div>
       </div>
+      <div class="password__best-practices">
+        Best practices
+      </div>
     </div>
   </Layout>
 </template>

@@ -6,17 +6,17 @@
 
 <script>
 export default {
-  name: 'Alert',
+  name: "Alert",
   props: {
     type: {
       type: String,
-      required: true,
+      required: true
     },
     message: {
       type: String,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
 
