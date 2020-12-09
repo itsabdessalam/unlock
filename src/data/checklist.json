@@ -1,0 +1,42 @@
+[
+  {
+    "value": "Set a minimum password length of 12 characters",
+    "description": ""
+  },
+  {
+    "value": "Set a reminder to change your password regularly",
+    "description": ""
+  },
+  {
+    "value": "Never share your password",
+    "description": ""
+  },
+  {
+    "value": "Don’t reuse passwords across websites",
+    "description": ""
+  },
+  {
+    "value": "Use a password manager",
+    "description": ""
+  },
+  {
+    "value": "Use two-factor authentication",
+    "description": ""
+  },
+  {
+    "value": "Don’t leave windows open",
+    "description": ""
+  },
+  {
+    "value": "Never type in a password in plain sight of others",
+    "description": ""
+  },
+  {
+    "value": "Avoid writing down passwords or creating password hint sheet",
+    "description": ""
+  },
+  {
+    "value": "Don't email passwords to yourself",
+    "description": ""
+  }
+]

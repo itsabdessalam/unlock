@@ -55,8 +55,9 @@ export default {
   position: fixed;
   right: 12px;
   bottom: 12px;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   color: #ffffff;
   background: $primary;
   cursor: pointer;

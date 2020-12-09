@@ -87,25 +87,81 @@
         >
           This password does not appear in any database of leaked passwords.
         </div>
-
-        <div v-if="feedback.suggestions && feedback.suggestions.length > 0">
-          <h3>Suggestions</h3>
-          <ul v-for="(suggestion, index) in feedback.suggestions" :key="index">
-            <li>{{ suggestion }}</li>
-          </ul>
+        <div
+          v-if="feedback.suggestions && feedback.suggestions.length > 0"
+          class="password__suggestions"
+        >
+          <div class="password__suggestions__icon">
+            <svg
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
+            </svg>
+          </div>
+          <div class="password__suggestions__text">
+            <ul
+              v-for="(suggestion, index) in feedback.suggestions"
+              :key="index"
+            >
+              <li>{{ suggestion }}</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="password__best-practices">
-        Best practices
+        <h2>
+          Best practices
+          <span class="check__count">
+            {{ checkedCount }} out of {{ checklist.length }}
+          </span>
+        </h2>
+
+        <div
+          v-for="item in checklist"
+          :key="item.id"
+          class="password__best-practices__item"
+        >
+          <Checkbox
+            :id="item.id"
+            :name="item.id"
+            :label="item.value"
+            :checked="item.checked"
+            v-model="item.checked"
+          />
+        </div>
       </div>
     </div>
   </Layout>
 </template>
 
+<page-query>
+query {
+   checklist: allChecklist {
+    totalCount
+    edges {
+      node {
+        id
+        value
+      }
+    }
+  }
+}
+</page-query>
+
 <script>
 import zxcvbn from "zxcvbn";
 import CryptoJS from "crypto-js";
+
 import Loader from "~/components/elements/Loader";
+import Checkbox from "~/components/elements/Checkbox";
 
 const debounce = (fn, ms = 0) => {
   let timeoutId;
@@ -118,6 +174,7 @@ const debounce = (fn, ms = 0) => {
 export default {
   data() {
     return {
+      checklist: [],
       password: "",
       isPasswordVisible: false,
       checked: false,
@@ -128,9 +185,25 @@ export default {
     };
   },
   components: {
-    Loader
+    Loader,
+    Checkbox
   },
-  created() {},
+  created() {
+    if (this.$page) {
+      this.checklist = this.$page.checklist.edges.map(edge => ({
+        ...edge.node,
+        checked: false
+      }));
+    }
+  },
+  computed: {
+    checkedCount: function() {
+      return this.checklist.filter(item => item.checked).length;
+    },
+    allChecked: function() {
+      return this.checklist.every(item => item.checked);
+    }
+  },
   methods: {
     async checkPassword(password) {
       this.isChecking = true;
@@ -257,6 +330,7 @@ export default {
   border-radius: 8px;
 
   h3 {
+    margin-top: 0;
     margin-bottom: 12px;
   }
 
@@ -266,6 +340,28 @@ export default {
     margin-bottom: 24px;
     color: $title;
     margin-bottom: 4px;
+  }
+}
+
+.password__suggestions {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+
+  .password__suggestions__icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 24px;
+    color: #facc15;
+    background-color: rgba($color: #facc15, $alpha: 0.1);
+
+    > svg {
+      width: 32px;
+    }
   }
 }
 
@@ -308,6 +404,34 @@ export default {
   .strength-meter-fill[data-strength="4"] {
     background: #059669;
     width: 100%;
+  }
+}
+
+.password__best-practices {
+  h2 {
+    display: inline-block;
+
+    .check__count {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 400;
+      color: #94a3b8;
+      margin-left: 8px;
+    }
+  }
+  .password__best-practices__item {
+    min-height: 72px;
+    padding: 10px 15px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: rgba(226, 232, 240, 0.16) 0px 1px 100px 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
   }
 }
 </style>

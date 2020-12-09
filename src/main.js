@@ -6,7 +6,16 @@ import "~/assets/style/globals.scss";
 import DefaultLayout from "~/layouts/Default.vue";
 
 // eslint-disable-next-line no-unused-vars
-export default function(Vue, { router, head, isClient }) {
-  // Set default layout as a global component
+export default function(Vue, { appOptions, router, head, isClient }) {
   Vue.component("Layout", DefaultLayout);
+
+  if (process.isClient) {
+    router.beforeEach((to, from, next) => {
+      if (to.fullPath === "/") {
+        next("/tester");
+      } else {
+        next();
+      }
+    });
+  }
 }
