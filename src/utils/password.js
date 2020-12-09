@@ -8,7 +8,6 @@ import { shuffle } from "./array";
  * @param {string} password
  * @returns {string}
  */
-
 export const getHash = password => {
   return CryptoJS.SHA1(password)
     .toString()
@@ -31,7 +30,6 @@ export const getStrength = password => {
  * @param {object} config
  * @returns {string}
  */
-
 export const generate = config => {
   const { length, lowercase, uppercase, numbers, special } = config;
 
