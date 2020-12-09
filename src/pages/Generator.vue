@@ -35,6 +35,22 @@
           ></path>
         </svg>
       </button>
+      <button @click="generatePassword" class="password__generate">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          ></path>
+        </svg>
+      </button>
     </div>
 
     <div class="password__length">
@@ -49,44 +65,41 @@
     </div>
 
     <div class="password__criteria">
-      <Checkbox
-        id="lowercaseChars"
-        name="lowercaseChars"
-        label="Lowercase"
-        :checked="lowercaseChars"
-        :disabled="true"
-        v-model="lowercaseChars"
-      />
+      <label for="">Filters</label>
+      <div class="password__criteria__filters">
+        <Checkbox
+          id="lowercaseChars"
+          name="lowercaseChars"
+          label="Lowercase"
+          :checked="lowercaseChars"
+          :disabled="true"
+          v-model="lowercaseChars"
+        />
 
-      <Checkbox
-        id="uppercaseChars"
-        name="uppercaseChars"
-        label="Uppercase"
-        :checked="uppercaseChars"
-        v-model="uppercaseChars"
-      />
+        <Checkbox
+          id="uppercaseChars"
+          name="uppercaseChars"
+          label="Uppercase"
+          :checked="uppercaseChars"
+          v-model="uppercaseChars"
+        />
 
-      <Checkbox
-        id="numbers"
-        name="numbers"
-        label="Numbers"
-        :checked="numbers"
-        v-model="numbers"
-      />
-      <Checkbox
-        id="specialChars"
-        name="specialChars"
-        label="Special chars"
-        :checked="specialChars"
-        v-model="specialChars"
-      />
+        <Checkbox
+          id="numbers"
+          name="numbers"
+          label="Numbers"
+          :checked="numbers"
+          v-model="numbers"
+        />
+        <Checkbox
+          id="specialChars"
+          name="specialChars"
+          label="Special chars"
+          :checked="specialChars"
+          v-model="specialChars"
+        />
+      </div>
     </div>
-    <Button
-      class="button button--primary password__generate"
-      @click="generatePassword"
-    >
-      Generate
-    </Button>
   </Layout>
 </template>
 
@@ -95,7 +108,6 @@ import { generate } from "~/utils/password";
 
 import Checkbox from "~/components/elements/Checkbox";
 import Input from "~/components/elements/Input";
-import Button from "~/components/elements/Button";
 
 export default {
   metaInfo: {
@@ -118,7 +130,7 @@ export default {
       passwordCopied: false
     };
   },
-  components: { Checkbox, Input, Button },
+  components: { Checkbox, Input },
   methods: {
     generatePassword() {
       this.password = generate({
@@ -157,9 +169,21 @@ export default {
   margin: 24px 0;
   padding: 0 4px;
 
+  .password__criteria__filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  label {
+    display: block;
+  }
+
   .checkbox {
-    &:not(:last-child) {
-      margin-bottom: 8px;
+    width: auto;
+
+    &:not(:first-child) {
+      margin-left: 8px;
     }
   }
 }
@@ -191,13 +215,12 @@ export default {
   .password__copy {
     position: absolute;
     right: 22px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
-    min-width: 48px;
+    height: 32px;
+    width: 32px;
     cursor: pointer;
     color: $primary;
     background-color: rgba($color: $primary, $alpha: 0.1);
@@ -217,14 +240,28 @@ export default {
       background-color: rgba($color: #34d399, $alpha: 0.1);
     }
   }
-}
 
-.password__generate {
-  height: 52px;
-  padding: 0;
-  background-color: #007aff;
-  color: #fff;
-  font-size: 16px;
+  .password__generate {
+    position: absolute;
+    right: 22px;
+    top: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    color: #38bdf8;
+    background-color: rgba($color: #38bdf8, $alpha: 0.1);
+    border: none;
+    outline: none;
+    border-radius: 50%;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }
 
 .password__length {

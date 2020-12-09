@@ -104,7 +104,7 @@ export default {
       transform: translateY(-50%);
       width: 24px;
       height: 24px;
-      color: $muted;
+      color: $primary;
     }
   }
 }
