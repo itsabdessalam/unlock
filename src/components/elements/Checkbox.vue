@@ -1,5 +1,5 @@
 <template>
-  <div class="checkbox">
+  <div :class="['checkbox', styled ? 'styled' : null]" :checked="checked">
     <span class="checkbox__check">
       <input
         class="checkbox__input"
@@ -33,7 +33,8 @@ export default {
     type: {
       type: String,
       default: "text"
-    }
+    },
+    styled: { type: Boolean, default: false }
   },
   methods: {
     handleCheckboxChange(value) {
@@ -50,6 +51,16 @@ export default {
   width: 100%;
   height: 100%;
   cursor: pointer;
+
+  &.styled[checked="checked"] {
+    .checkbox__text {
+      color: $muted;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
 
   .checkbox__check {
     width: 18px;
@@ -94,8 +105,21 @@ export default {
       cursor: not-allowed;
     }
   }
+
   .checkbox__text {
     margin-left: 8px;
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 0;
+      height: 1px;
+      background-color: $muted;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transition: 0.2s ease;
+    }
   }
 }
 </style>

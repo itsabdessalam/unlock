@@ -199,10 +199,10 @@ export default {
     .nav__link {
       margin-left: 24px;
       position: relative;
-      opacity: 0.7;
+      color: $muted;
 
       &--active {
-        opacity: 1;
+        color: $text;
       }
 
       &:hover {

@@ -129,7 +129,7 @@ export default {
         display: block;
         margin-bottom: 12px;
         font-size: 12px;
-        color: $subtitle;
+        color: $muted;
       }
 
       input:not([type="checkbox"]):not([type="radio"]),

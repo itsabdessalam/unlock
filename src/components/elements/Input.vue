@@ -49,5 +49,18 @@ export default {
     border-color: $primary;
     box-shadow: 0 0 0 4px #d6e3fd;
   }
+
+  &::placeholder {
+    color: $muted;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: $muted;
+  }
+
+  &::-ms-input-placeholder {
+    color: $muted;
+  }
 }
 </style>

@@ -1,14 +1,24 @@
 /**
  *
  *
- * @param {*} [...arr]
- * @return {*}
+ * @param {*} array
+ * @returns {Array}
  */
-export const shuffle = ([...arr]) => {
-  let m = arr.length;
-  while (m) {
-    const i = Math.floor(Math.random() * m--);
-    [arr[m], arr[i]] = [arr[i], arr[m]];
+export const shuffle = array => {
+  const length = array == null ? 0 : array.length;
+  if (!length) {
+    return [];
   }
-  return arr;
+
+  let index = -1;
+  const lastIndex = length - 1;
+  const result = [...array];
+
+  while (++index < length) {
+    const rand = index + Math.floor(Math.random() * (lastIndex - index + 1));
+    const value = result[rand];
+    result[rand] = result[index];
+    result[index] = value;
+  }
+  return result;
 };

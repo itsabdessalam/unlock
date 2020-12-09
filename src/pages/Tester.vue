@@ -2,12 +2,13 @@
   <Layout>
     <div class="password__checker">
       <form>
-        <input
+        <Input
           id="password"
           :type="!isPasswordVisible ? 'password' : 'text'"
           v-model="password"
           class="password__entry"
           autocomplete="on"
+          placeholder="Type your password..."
         />
         <button
           class="password__reveal"
@@ -15,7 +16,6 @@
         >
           <svg
             v-if="!isPasswordVisible"
-            class="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -36,7 +36,6 @@
           </svg>
           <svg
             v-else
-            class="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -74,19 +73,14 @@
           Everything seems good!
         </div>
 
-        <div
-          v-if="password && pwnedTime && pwnedTime > 0"
-          class="password__pwned"
-        >
+        <div v-if="password && pwnedTime > 0" class="password__pwned">
           This password has appeared {{ pwnedTime }} times in a database of
           leaked passwords.
         </div>
-        <div
-          v-if="password && !pwnedTime && pwnedTime === 0"
-          class="password__pwned"
-        >
+        <div v-else-if="password && pwnedTime === 0" class="password__pwned">
           This password does not appear in any database of leaked passwords.
         </div>
+
         <div
           v-if="feedback.suggestions && feedback.suggestions.length > 0"
           class="password__suggestions"
@@ -138,6 +132,7 @@
             :name="item.id"
             :label="item.value"
             :checked="item.checked"
+            :styled="true"
             v-model="item.checked"
           />
         </div>
@@ -146,7 +141,7 @@
     <Toast
       :show="showToast"
       type="success"
-      message="Well done! 👏"
+      message="Well done! 🥳"
       @close="hideToast"
     />
   </Layout>
@@ -167,21 +162,14 @@ query {
 </page-query>
 
 <script>
-import zxcvbn from "zxcvbn";
-import CryptoJS from "crypto-js";
+import { debounce } from "~/utils/common";
+import { getHash, getStrength } from "~/utils/password";
 
 import Loader from "~/components/elements/Loader";
 import Button from "~/components/elements/Button";
+import Input from "~/components/elements/Input";
 import Checkbox from "~/components/elements/Checkbox";
 import Toast from "~/components/elements/Toast";
-
-const debounce = (fn, ms = 0) => {
-  let timeoutId;
-  return function(...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
-  };
-};
 
 export default {
   metaInfo: {
@@ -204,6 +192,7 @@ export default {
     Loader,
     Checkbox,
     Button,
+    Input,
     Toast
   },
   created() {
@@ -227,20 +216,16 @@ export default {
       this.isChecking = true;
       this.checked = false;
 
-      const check = zxcvbn(password);
-      const hash = CryptoJS.SHA1(password)
-        .toString()
-        .toUpperCase();
-
+      const strength = getStrength(password);
+      const hash = getHash(password);
       const response = await fetch(
         "https://api.pwnedpasswords.com/range/" + hash.substr(0, 5)
       );
       const data = await response.text();
 
       let time = 0;
-
       data.split("\n").forEach(value => {
-        var result = value.split(":");
+        const result = value.split(":");
         if (hash.substr(0, 5) + result[0] == hash) {
           time = result[1];
         }
@@ -254,8 +239,8 @@ export default {
         this.pwnedTime = 0;
       }
 
-      this.feedback = check.feedback;
-      this.score = check.score;
+      this.feedback = strength.feedback;
+      this.score = strength.score;
 
       setTimeout(() => {
         this.isChecking = false;
@@ -272,23 +257,15 @@ export default {
       this.score = -1;
     },
     checkAll() {
-      if (this.allChecked) {
-        this.checklist = this.checklist.map(item => ({
-          ...item,
-          checked: false
-        }));
-      } else {
-        this.checklist = this.checklist.map(item => ({
-          ...item,
-          checked: true
-        }));
-      }
+      this.checklist = this.checklist.map(item => ({
+        ...item,
+        checked: !this.allChecked
+      }));
     },
     hideToast() {
       this.showToast = false;
     }
   },
-
   watch: {
     password: debounce(function() {
       this.checked = false;
@@ -303,6 +280,10 @@ export default {
     allChecked: function(newVal, oldVal) {
       if (newVal === true) {
         this.showToast = true;
+
+        setTimeout(() => {
+          this.hideToast();
+        }, 2500);
       }
     }
   }
@@ -355,7 +336,7 @@ export default {
     outline: none;
 
     svg {
-      color: #94a3b8;
+      color: $muted;
       width: 24px;
       height: 24px;
     }
@@ -381,6 +362,10 @@ export default {
     color: $title;
     margin-bottom: 4px;
   }
+
+  .password__pwned {
+    color: $muted;
+  }
 }
 
 .password__suggestions {
@@ -396,11 +381,11 @@ export default {
     justify-content: center;
     border-radius: 50%;
     margin-right: 24px;
-    color: #facc15;
-    background-color: rgba($color: #facc15, $alpha: 0.1);
+    color: #fbbf24;
+    background-color: rgba($color: #fbbf24, $alpha: 0.1);
 
     > svg {
-      width: 32px;
+      width: 28px;
     }
   }
 }
@@ -448,16 +433,17 @@ export default {
 }
 
 .password__best-practices {
-  margin-top: 24px;
+  margin-top: 32px;
 
   h2 {
     display: inline-block;
+    margin: 0;
 
     .check__count {
       display: inline-block;
       font-size: 16px;
       font-weight: 400;
-      color: #94a3b8;
+      color: $muted;
       margin-left: 8px;
     }
   }
@@ -469,7 +455,7 @@ export default {
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    box-shadow: rgba(226, 232, 240, 0.16) 0px 1px 100px 10px;
+    box-shadow: 0 1px 100px 10px rgba(148, 163, 184, 0.06);
 
     &:not(:last-child) {
       margin-bottom: 12px;

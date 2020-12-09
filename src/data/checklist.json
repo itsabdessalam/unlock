@@ -38,5 +38,21 @@
   {
     "value": "Don't email passwords to yourself",
     "description": ""
+  },
+  {
+    "value": "Don’t use any personal information, such as a birthday date, pet name...",
+    "description": ""
+  },
+  {
+    "value": "Use different types of characters",
+    "description": ""
+  },
+  {
+    "value": "Avoid using common words or phrases",
+    "description": ""
+  },
+  {
+    "value": "Don’t use personally identifiable terms",
+    "description": ""
   }
 ]

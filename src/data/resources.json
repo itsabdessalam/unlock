@@ -1,0 +1,45 @@
+[
+  {
+    "title": "What is a secure password and why is it important to have one?",
+    "description": "",
+    "link": "https://www.namecheap.com/support/knowledgebase/article.aspx/9517/45/what-is-a-secure-password-and-why-is-it-important-to-have-one/",
+    "source": "Namecheap"
+  },
+  {
+    "title": "Your Password Health Score: The Key to Improving Your Digital Security Today",
+    "description": "",
+    "link": "https://blog.dashlane.com/password-health-available-dashlane-web-app/",
+    "source": "Dashlane"
+  },
+  {
+    "title": "How to Create a Secure Password in 2020: The Password Security Checklist",
+    "description": "",
+    "link": "https://www.upguard.com/blog/the-password-security-checklist",
+    "source": "UpGuard"
+  },
+  {
+    "title": "How to create a strong password",
+    "description": "",
+    "link": "https://blog.avast.com/strong-password-ideas",
+    "source": "Avast"
+  },
+  {
+    "title": "Strong Passwords – How to Create & Benefits",
+    "description": "",
+    "link": "https://www.kaspersky.com/resource-center/threats/how-to-create-a-strong-password",
+    "source": "Kaspersky"
+  },
+
+  {
+    "title": "zxcvbn: realistic password strength estimation",
+    "description": "",
+    "link": "https://dropbox.tech/security/zxcvbn-realistic-password-strength-estimation",
+    "source": "Dropbox"
+  },
+  {
+    "title": "Top Five Password Management Best Practices",
+    "description": "",
+    "link": "https://www.sailpoint.com/identity-library/password-management-best-practices",
+    "source": "SailPoint"
+  }
+]

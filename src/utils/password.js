@@ -1,4 +1,16 @@
-import { shuffle } from "~/utils/array";
+import zxcvbn from "zxcvbn";
+import CryptoJS from "crypto-js";
+import { shuffle } from "./array";
+
+export const getHash = password => {
+  return CryptoJS.SHA1(password)
+    .toString()
+    .toUpperCase();
+};
+
+export const getStrength = password => {
+  return zxcvbn(password);
+};
 
 export const generate = config => {
   const { length, lowercase, uppercase, numbers, special } = config;

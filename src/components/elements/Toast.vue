@@ -45,24 +45,23 @@ export default {
 <style lang="scss">
 .toast {
   padding: 22px;
-  margin-bottom: 22px;
   border-radius: 12px;
   min-width: 320px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  bottom: 48px;
+  bottom: 60px;
   right: -1000px;
   color: #ffffff;
   transition: all ease-out 0.2s;
 
   &.show {
-    right: 22px;
+    right: 12px;
   }
 
   &--success {
-    background-color: $success;
+    background-color: $primary;
   }
   &--info {
     background-color: $info;

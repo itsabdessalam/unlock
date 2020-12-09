@@ -5,17 +5,32 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-module.exports = function(api) {
+const getChecklist = actions => {
+  const checklist = require("./src/data/checklist.json");
+  const collection = actions.addCollection({
+    typeName: "Checklist"
+  });
+
+  for (const item of checklist) {
+    collection.addNode(item);
+  }
+};
+
+const getResources = actions => {
+  const resources = require("./src/data/resources.json");
+  const collection = actions.addCollection({
+    typeName: "Resource"
+  });
+
+  for (const item of resources) {
+    collection.addNode(item);
+  }
+};
+
+module.exports = api => {
   api.loadSource(async actions => {
-    const Checklist = require("./src/data/checklist.json");
-
-    const collection = actions.addCollection({
-      typeName: "Checklist"
-    });
-
-    for (const item of Checklist) {
-      collection.addNode(item);
-    }
+    getChecklist(actions);
+    getResources(actions);
   });
   api.createPages(({ createPage }) => {
     createPage({
