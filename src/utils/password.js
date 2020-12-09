@@ -38,7 +38,7 @@ export const generate = config => {
   let password = "";
 
   if (lowercase) {
-    password += "abcdedfghijklmnopqrst";
+    password += "abcdefghijklmnopqrstuvwxyz";
   }
 
   if (uppercase) {
