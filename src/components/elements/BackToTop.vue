@@ -36,10 +36,10 @@ export default {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
 
-      if (!this.visible && scrollTop > 500) {
+      if (!this.visible && scrollTop > 270) {
         this.visible = true;
       }
-      if (this.visible && scrollTop <= 500) {
+      if (this.visible && scrollTop <= 270) {
         this.visible = false;
       }
     }
