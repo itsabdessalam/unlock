@@ -1,7 +1,7 @@
 /**
+ * Returns a new array with randomized order of the values
  *
- *
- * @param {*} array
+ * @param {Array} array
  * @returns {Array}
  */
 export const shuffle = array => {

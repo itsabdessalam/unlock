@@ -1,5 +1,6 @@
 /**
- *
+ * Creates a debounced function that delays invoking the provided function
+ * until at least ms milliseconds have elapsed since the last time it was invoked.
  *
  * @param {*} fn
  * @param {number} [ms=0]
