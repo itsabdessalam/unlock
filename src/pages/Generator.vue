@@ -6,6 +6,7 @@
       </span>
       <button @click="copyPassword" class="password__copy">
         <svg
+          v-if="!passwordCopied"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -16,6 +17,21 @@
             stroke-linejoin="round"
             stroke-width="2"
             d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+          ></path>
+        </svg>
+
+        <svg
+          v-else
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
           ></path>
         </svg>
       </button>
@@ -80,6 +96,9 @@ import Input from "~/components/elements/Input";
 import Button from "~/components/elements/Button";
 
 export default {
+  metaInfo: {
+    title: "Generator"
+  },
   data() {
     return {
       password: generate({
@@ -93,7 +112,8 @@ export default {
       lowercaseChars: true,
       uppercaseChars: true,
       numbers: true,
-      specialChars: true
+      specialChars: true,
+      passwordCopied: false
     };
   },
   components: { Checkbox, Input, Button },
@@ -107,7 +127,7 @@ export default {
         special: this.specialChars
       });
     },
-    copyPassword() {
+    copyPassword(event) {
       try {
         const textarea = document.createElement("textarea");
         textarea.value = this.password;
@@ -115,6 +135,13 @@ export default {
         textarea.select();
         document.execCommand("copy");
         document.body.removeChild(textarea);
+        event.target.classList.add("password__copy--copied");
+        this.passwordCopied = true;
+
+        setTimeout(() => {
+          this.passwordCopied = false;
+          event.target.classList.remove("password__copy--copied");
+        }, 750);
       } catch (error) {
         console.error(error);
       }
@@ -153,15 +180,15 @@ export default {
     border: 2px solid $primary;
     border-radius: 12px;
     font-family: inherit;
-    background-color: $primary;
-    color: #fff;
+    background-color: #ffffff;
+    color: $text;
     outline: 0;
     transition-duration: 0.2s;
   }
 
   .password__copy {
     position: absolute;
-    right: 8px;
+    right: 22px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -170,14 +197,25 @@ export default {
     min-height: 48px;
     min-width: 48px;
     cursor: pointer;
-    background: transparent;
+    background-color: $primary;
     border: none;
     outline: none;
+    border-radius: 50%;
 
     svg {
       color: #ffffff;
       width: 24px;
       height: 24px;
+    }
+
+    &--copied {
+      cursor: not-allowed;
+      pointer-events: none;
+      background-color: #34d399;
+
+      svg {
+        color: #ffffff;
+      }
     }
   }
 }

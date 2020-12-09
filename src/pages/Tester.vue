@@ -117,13 +117,17 @@
         </div>
       </div>
       <div class="password__best-practices">
-        <h2>
-          Best practices
-          <span class="check__count">
-            {{ checkedCount }} out of {{ checklist.length }}
-          </span>
-        </h2>
-
+        <div class="password__best-practices__header">
+          <h2>
+            Best practices
+            <span class="check__count">
+              {{ checkedCount }} out of {{ checklist.length }}
+            </span>
+          </h2>
+          <Button @click="checkAll" class="password__best-practices__check">
+            {{ allChecked ? "Uncheck all" : "Check all" }}
+          </Button>
+        </div>
         <div
           v-for="item in checklist"
           :key="item.id"
@@ -139,6 +143,12 @@
         </div>
       </div>
     </div>
+    <Toast
+      :show="showToast"
+      type="success"
+      message="Well done! 👏"
+      @close="hideToast"
+    />
   </Layout>
 </template>
 
@@ -161,7 +171,9 @@ import zxcvbn from "zxcvbn";
 import CryptoJS from "crypto-js";
 
 import Loader from "~/components/elements/Loader";
+import Button from "~/components/elements/Button";
 import Checkbox from "~/components/elements/Checkbox";
+import Toast from "~/components/elements/Toast";
 
 const debounce = (fn, ms = 0) => {
   let timeoutId;
@@ -172,8 +184,12 @@ const debounce = (fn, ms = 0) => {
 };
 
 export default {
+  metaInfo: {
+    title: "Tester"
+  },
   data() {
     return {
+      showToast: false,
       checklist: [],
       password: "",
       isPasswordVisible: false,
@@ -186,7 +202,9 @@ export default {
   },
   components: {
     Loader,
-    Checkbox
+    Checkbox,
+    Button,
+    Toast
   },
   created() {
     if (this.$page) {
@@ -252,6 +270,22 @@ export default {
       this.pwnedTime = 0;
       this.checked = false;
       this.score = -1;
+    },
+    checkAll() {
+      if (this.allChecked) {
+        this.checklist = this.checklist.map(item => ({
+          ...item,
+          checked: false
+        }));
+      } else {
+        this.checklist = this.checklist.map(item => ({
+          ...item,
+          checked: true
+        }));
+      }
+    },
+    hideToast() {
+      this.showToast = false;
     }
   },
 
@@ -264,7 +298,13 @@ export default {
       } else {
         this.reset();
       }
-    }, 500)
+    }, 500),
+    // eslint-disable-next-line no-unused-vars
+    allChecked: function(newVal, oldVal) {
+      if (newVal === true) {
+        this.showToast = true;
+      }
+    }
   }
 };
 </script>
@@ -408,6 +448,8 @@ export default {
 }
 
 .password__best-practices {
+  margin-top: 24px;
+
   h2 {
     display: inline-block;
 
@@ -432,6 +474,22 @@ export default {
     &:not(:last-child) {
       margin-bottom: 12px;
     }
+  }
+
+  .password__best-practices__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .password__best-practices__check {
+    max-width: 132px;
+    height: 52px;
+    padding: 0;
+    background-color: $primary;
+    color: #fff;
+    font-size: 16px;
   }
 }
 </style>

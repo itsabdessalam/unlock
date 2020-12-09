@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  metaInfo: {
+    title: "Resources"
+  }
+};
 </script>
 
 <style></style>
