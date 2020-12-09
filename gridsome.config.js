@@ -27,7 +27,8 @@ const purgeConfig = {
     "g-image--lazy",
     "g-image--loaded",
     "active",
-    "active--exact"
+    "active--exact",
+    "checkbox__input"
   ],
   whitelistPatterns: [
     /shiki/,
@@ -43,7 +44,7 @@ const purgeConfig = {
     /::v-deep/,
     /alert-.*/
   ],
-  defaultExtractor: (content) => {
+  defaultExtractor: content => {
     const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
     const innerMatches = content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || [];
     return broadMatches.concat(innerMatches);
@@ -53,13 +54,13 @@ const purgeConfig = {
 module.exports = {
   siteName: "Unlock",
 
-  chainWebpack: (config) => {
-    ["css", "scss", "sass", "less", "stylus", "postcss"].forEach((lang) => {
+  chainWebpack: config => {
+    ["css", "scss", "sass", "less", "stylus", "postcss"].forEach(lang => {
       config.module
         .rule(lang)
         .oneOf("normal")
         .use("postcss-loader")
-        .tap((options) => {
+        .tap(options => {
           options.plugins = [];
           options.plugins.push(
             require("autoprefixer")(),
