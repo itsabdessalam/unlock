@@ -85,6 +85,7 @@ export default {
     }
 
     .resource__title {
+      font-weight: 400;
       margin-bottom: 4px;
     }
 
