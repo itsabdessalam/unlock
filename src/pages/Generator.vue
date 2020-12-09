@@ -37,7 +37,6 @@
       </button>
       <button @click="generatePassword" class="password__generate">
         <svg
-          class="w-6 h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -57,10 +56,10 @@
       <label for="passwordLength">Length</label>
       <Input
         type="number"
-        id="passwordLength"
-        name="passwordLength"
+        id="length"
+        name="length"
         min="1"
-        v-model="passwordLength"
+        v-model="config.length"
       />
     </div>
 
@@ -68,35 +67,35 @@
       <label for="">Filters</label>
       <div class="password__criteria__filters">
         <Checkbox
-          id="lowercaseChars"
-          name="lowercaseChars"
+          id="lowercase"
+          name="lowercase"
           label="Lowercase"
-          :checked="lowercaseChars"
+          :checked="config.lowercase"
+          v-model="config.lowercase"
           :disabled="true"
-          v-model="lowercaseChars"
         />
 
         <Checkbox
-          id="uppercaseChars"
-          name="uppercaseChars"
+          id="uppercase"
+          name="uppercase"
           label="Uppercase"
-          :checked="uppercaseChars"
-          v-model="uppercaseChars"
+          :checked="config.uppercase"
+          v-model="config.uppercase"
         />
 
         <Checkbox
           id="numbers"
           name="numbers"
           label="Numbers"
-          :checked="numbers"
-          v-model="numbers"
+          :checked="config.numbers"
+          v-model="config.numbers"
         />
         <Checkbox
-          id="specialChars"
-          name="specialChars"
+          id="special"
+          name="special"
           label="Special chars"
-          :checked="specialChars"
-          v-model="specialChars"
+          :checked="config.special"
+          v-model="config.special"
         />
       </div>
     </div>
@@ -109,37 +108,29 @@ import { generate } from "~/utils/password";
 import Checkbox from "~/components/elements/Checkbox";
 import Input from "~/components/elements/Input";
 
+const DEFAULT_CONFIG = {
+  length: 16,
+  lowercase: true,
+  uppercase: true,
+  numbers: true,
+  special: true
+};
+
 export default {
   metaInfo: {
     title: "Generator"
   },
   data() {
     return {
-      password: generate({
-        length: 16,
-        lowercase: true,
-        uppercase: true,
-        numbers: true,
-        special: true
-      }),
-      passwordLength: 16,
-      lowercaseChars: true,
-      uppercaseChars: true,
-      numbers: true,
-      specialChars: true,
+      password: generate(DEFAULT_CONFIG),
+      config: DEFAULT_CONFIG,
       passwordCopied: false
     };
   },
   components: { Checkbox, Input },
   methods: {
     generatePassword() {
-      this.password = generate({
-        length: this.passwordLength,
-        lowercase: this.lowercaseChars,
-        uppercase: this.uppercaseChars,
-        numbers: this.numbers,
-        special: this.specialChars
-      });
+      this.password = generate(this.config);
     },
     copyPassword(event) {
       try {
@@ -158,6 +149,14 @@ export default {
         }, 750);
       } catch (error) {
         console.error(error);
+      }
+    }
+  },
+  watch: {
+    config: {
+      deep: true,
+      handler() {
+        this.generatePassword(this.config);
       }
     }
   }
