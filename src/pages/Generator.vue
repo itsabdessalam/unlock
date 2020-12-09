@@ -81,8 +81,10 @@
         v-model="specialChars"
       />
     </div>
-
-    <Button class="button button--primary" @click="generatePassword">
+    <Button
+      class="button button--primary password__generate"
+      @click="generatePassword"
+    >
       Generate
     </Button>
   </Layout>
@@ -178,7 +180,7 @@ export default {
     margin: 0;
     padding: 20px;
     border: 2px solid $primary;
-    border-radius: 12px;
+    border-radius: 8px;
     font-family: inherit;
     background-color: #ffffff;
     color: $text;
@@ -197,13 +199,13 @@ export default {
     min-height: 48px;
     min-width: 48px;
     cursor: pointer;
-    background-color: $primary;
+    color: $primary;
+    background-color: rgba($color: $primary, $alpha: 0.1);
     border: none;
     outline: none;
     border-radius: 50%;
 
     svg {
-      color: #ffffff;
       width: 24px;
       height: 24px;
     }
@@ -211,12 +213,23 @@ export default {
     &--copied {
       cursor: not-allowed;
       pointer-events: none;
-      background-color: #34d399;
-
-      svg {
-        color: #ffffff;
-      }
+      color: #34d399;
+      background-color: rgba($color: #34d399, $alpha: 0.1);
     }
+  }
+}
+
+.password__generate {
+  height: 52px;
+  padding: 0;
+  background-color: #007aff;
+  color: #fff;
+  font-size: 16px;
+}
+
+.password__length {
+  input {
+    height: 52px !important;
   }
 }
 </style>

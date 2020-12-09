@@ -45,7 +45,7 @@ export default {
 <style lang="scss">
 .toast {
   padding: 22px;
-  border-radius: 12px;
+  border-radius: 8px;
   min-width: 320px;
   display: flex;
   align-items: center;

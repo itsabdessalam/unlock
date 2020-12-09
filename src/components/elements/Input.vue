@@ -35,7 +35,7 @@ export default {
   margin: 0;
   padding: 20px;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: inherit;
   background-color: #ffffff;
   outline: 0;

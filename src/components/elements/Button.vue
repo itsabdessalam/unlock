@@ -27,7 +27,7 @@ export default {
   margin: 0;
   padding: 20px;
   border: 2px solid $primary;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all ease-out 0.2s;
 
