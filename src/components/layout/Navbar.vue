@@ -5,7 +5,7 @@
       <div class="nav__links__inner">
         <g-link
           class="nav__link"
-          to="/check"
+          to="/check/"
           title="Check"
           exact-active-class="nav__link--active"
           exact
@@ -14,7 +14,7 @@
         </g-link>
         <g-link
           class="nav__link"
-          to="/generate"
+          to="/generate/"
           title="Generate"
           exact-active-class="nav__link--active"
           exact
@@ -23,57 +23,12 @@
         </g-link>
         <g-link
           class="nav__link"
-          to="/resources"
+          to="/resources/"
           title="Resources"
           exact-active-class="nav__link--active"
           exact
         >
           Resources
-        </g-link>
-      </div>
-    </div>
-
-    <div class="nav__links nav__links--mobile" :class="{ open: isMenuOpen }">
-      <a class="nav__link__menu" @click.prevent="handleClick">
-        <svg
-          v-if="!isMenuOpen"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="menu-open"
-        >
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-        <svg
-          v-else
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </a>
-      <Logo />
-
-      <div class="nav__links__inner" :class="{ visible: isMenuOpen }">
-        <g-link class="nav__link" to="/check" title="Check">
-          Check
-        </g-link>
-        <g-link class="nav__link" to="/generate" title="Generate">
-          Generate
         </g-link>
       </div>
     </div>
