@@ -12,7 +12,6 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.2.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",

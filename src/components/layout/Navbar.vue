@@ -8,7 +8,6 @@
           to="/check/"
           title="Check"
           exact-active-class="nav__link--active"
-          exact
         >
           Check
         </g-link>
@@ -17,7 +16,6 @@
           to="/generate/"
           title="Generate"
           exact-active-class="nav__link--active"
-          exact
         >
           Generate
         </g-link>
@@ -26,7 +24,6 @@
           to="/resources/"
           title="Resources"
           exact-active-class="nav__link--active"
-          exact
         >
           Resources
         </g-link>
