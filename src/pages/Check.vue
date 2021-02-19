@@ -8,7 +8,7 @@
           v-model="password"
           class="password__entry"
           autocomplete="on"
-          placeholder="Type your password..."
+          placeholder="Password you want to check..."
         />
         <button
           class="password__reveal"
@@ -173,7 +173,7 @@ import Toast from "~/components/elements/Toast";
 
 export default {
   metaInfo: {
-    title: "Tester"
+    title: "Check password"
   },
   data() {
     return {

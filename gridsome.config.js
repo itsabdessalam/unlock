@@ -53,7 +53,7 @@ const purgeConfig = {
 };
 
 module.exports = {
-  siteName: "Unlock",
+  siteName: "mypasswd",
 
   chainWebpack: config => {
     ["css", "scss", "sass", "less", "stylus", "postcss"].forEach(lang => {

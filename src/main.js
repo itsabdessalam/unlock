@@ -12,7 +12,7 @@ export default function(Vue, { appOptions, router, head, isClient }) {
   if (process.isClient) {
     router.beforeEach((to, from, next) => {
       if (to.fullPath === "/") {
-        next("/tester");
+        next("/check");
       } else {
         next();
       }

@@ -35,7 +35,7 @@ module.exports = api => {
   api.createPages(({ createPage }) => {
     createPage({
       path: "/",
-      component: "./src/pages/Tester.vue"
+      component: "./src/pages/Check.vue"
     });
   });
 };

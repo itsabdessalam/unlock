@@ -5,21 +5,21 @@
       <div class="nav__links__inner">
         <g-link
           class="nav__link"
-          to="/tester"
-          title="Tester"
+          to="/check"
+          title="Check"
           exact-active-class="nav__link--active"
           exact
         >
-          Tester
+          Check
         </g-link>
         <g-link
           class="nav__link"
-          to="/generator"
-          title="Generator"
+          to="/generate"
+          title="Generate"
           exact-active-class="nav__link--active"
           exact
         >
-          Generator
+          Generate
         </g-link>
         <g-link
           class="nav__link"
@@ -69,11 +69,11 @@
       <Logo />
 
       <div class="nav__links__inner" :class="{ visible: isMenuOpen }">
-        <g-link class="nav__link" to="/tester" title="Tester">
-          Tester
+        <g-link class="nav__link" to="/check" title="Check">
+          Check
         </g-link>
-        <g-link class="nav__link" to="/generator" title="Generator">
-          Generator
+        <g-link class="nav__link" to="/generate" title="Generate">
+          Generate
         </g-link>
       </div>
     </div>
@@ -125,7 +125,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 80px;
+  height: 120px;
   max-width: 980px;
   top: 0;
   z-index: 1200;

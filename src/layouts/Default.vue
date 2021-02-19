@@ -57,7 +57,7 @@ export default {
   padding: 0 12px;
 
   .content {
-    min-height: calc(100vh - 280px);
+    min-height: calc(100vh - 320px);
     padding: 72px 0;
   }
 }

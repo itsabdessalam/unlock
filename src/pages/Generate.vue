@@ -118,7 +118,7 @@ const DEFAULT_CONFIG = {
 
 export default {
   metaInfo: {
-    title: "Generator"
+    title: "Generate password"
   },
   data() {
     return {
@@ -243,7 +243,7 @@ export default {
   .password__generate {
     position: absolute;
     right: 22px;
-    top: 68px;
+    top: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
