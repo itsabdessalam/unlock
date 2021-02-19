@@ -1,5 +1,5 @@
 <template>
-  <g-link class="logo" title="Home" to="/check/">
+  <g-link class="logo" title="Home" to="/">
     <svg
       width="42"
       height="42"

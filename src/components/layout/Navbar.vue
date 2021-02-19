@@ -5,7 +5,7 @@
       <div class="nav__links__inner">
         <g-link
           class="nav__link"
-          to="/check/"
+          to="/"
           title="Check"
           exact-active-class="nav__link--active"
         >
