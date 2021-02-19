@@ -1,5 +1,5 @@
 <template>
-  <g-link class="logo" title="Home" to="/">
+  <a class="logo" :href="$url('/')" title="Home">
     <svg
       width="42"
       height="42"
@@ -16,7 +16,7 @@
       <circle cx="256.5" cy="301.5" r="27.5" fill="#007AFF" />
     </svg>
     <span class="logo__text">mypasswd</span>
-  </g-link>
+  </a>
 </template>
 
 <script>

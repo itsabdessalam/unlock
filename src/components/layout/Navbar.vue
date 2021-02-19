@@ -3,30 +3,15 @@
     <div class="nav__links nav__links--desktop">
       <Logo />
       <div class="nav__links__inner">
-        <g-link
-          class="nav__link"
-          to="/"
-          title="Check"
-          exact-active-class="nav__link--active"
-        >
+        <a class="nav__link" :href="$url('/')" title="Check">
           Check
-        </g-link>
-        <g-link
-          class="nav__link"
-          to="/generate/"
-          title="Generate"
-          exact-active-class="nav__link--active"
-        >
+        </a>
+        <a class="nav__link" :href="$url('/generate/')" title="Generate">
           Generate
-        </g-link>
-        <g-link
-          class="nav__link"
-          to="/resources/"
-          title="Resources"
-          exact-active-class="nav__link--active"
-        >
+        </a>
+        <a class="nav__link" :href="$url('/resources/')" title="Resources">
           Resources
-        </g-link>
+        </a>
       </div>
     </div>
   </nav>
@@ -151,11 +136,7 @@ export default {
     .nav__link {
       margin-left: 24px;
       position: relative;
-      color: $muted;
-
-      &--active {
-        color: $text;
-      }
+      color: $text;
 
       &:hover {
         opacity: 1;
