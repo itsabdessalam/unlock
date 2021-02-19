@@ -32,10 +32,4 @@ module.exports = api => {
     getChecklist(actions);
     getResources(actions);
   });
-  api.createPages(({ createPage }) => {
-    createPage({
-      path: "/",
-      component: "./src/pages/Check.vue"
-    });
-  });
 };
